@@ -12,16 +12,9 @@ resource "aws_instance" "ec2_test_inst" {
   vpc_security_group_ids      = [aws_security_group.test_inst_allow_all.id]
   key_name                    = var.key_name
   associate_public_ip_address = var.need_public_ip
-  user_data = <<-EOF
-                  #!/bin/bash
-                  sudo apt update -y
-                  sudo apt install iperf3 -y
-                  sudo apt install nginx -y 
-                  wget https://github.com/microsoft/ethr/releases/latest/download/ethr_linux.zip
-                  unzip ethr_linux.zip
-                  sudo apt install inetutils-traceroute 
-        EOF
-        
+  user_data = templatefile("${path.root}/user-data.sh", {
+  })
+       
   tags = var.custom_tags
    
 }
