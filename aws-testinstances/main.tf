@@ -12,8 +12,7 @@ resource "aws_instance" "ec2_test_inst" {
   vpc_security_group_ids      = [aws_security_group.test_inst_allow_all.id]
   key_name                    = var.key_name
   associate_public_ip_address = var.need_public_ip
-  user_data = templatefile("${path.root}/user-data.sh", {
-  })
+  user_data = file("${path.root}/user-data.sh")
        
   tags = var.custom_tags
    
