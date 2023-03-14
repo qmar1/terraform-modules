@@ -168,6 +168,7 @@ resource "aws_instance" "vsrxs" {
   key_name                    = var.key_name
   associate_public_ip_address = false
   vpc_security_group_ids      = [aws_security_group.my-sg["Management_public_SecGroup"].id]
+  source_dest_check = false
   # Note the default ENI with the instance will be mapped to fxp0
   # Attaching WAN/Internet ENI - mapped to ge-0/0/0  
   /*   network_interface {
@@ -332,6 +333,7 @@ resource "aws_instance" "ec2_jmp_host" {
   vpc_security_group_ids      = [aws_security_group.jump_host_ssh.id]
   key_name                    = var.key_name
   associate_public_ip_address = true
+  
   tags = {
     Name = "${local.vpc_name_w_prefix}-jump_host"
   } 
