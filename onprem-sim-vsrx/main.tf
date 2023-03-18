@@ -211,6 +211,7 @@ resource "aws_network_interface" "enis_for_vsrx" {
   subnet_id       = each.value.subnet_id
   security_groups = [each.value.sec_group_id]
   description     = each.value.name
+  source_dest_check = false
   tags = {
     Name       = each.value.name
     created_by = local.created_by_w_prefix
