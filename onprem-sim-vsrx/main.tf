@@ -122,13 +122,13 @@ resource "aws_security_group_rule" "icmp-in-internet" {
 
 }
 
-resource "aws_security_group_rule" "icmp-in-lan" {
+resource "aws_security_group_rule" "allow-all-in-lan" {
 
   security_group_id = aws_security_group.my-sg["Lan_private_SecGroup"].id
   type              = "ingress"
   from_port         = local.port_any
   to_port           = local.port_any
-  protocol          = local.protocol_icmp
+  protocol          = local.all_ip
   cidr_blocks       = local.all_ip
 
 }
@@ -153,7 +153,6 @@ resource "aws_security_group_rule" "https-in-lan" {
   cidr_blocks       = local.all_ip
 
 }
-
 
 # create vSRX instance one per management subnet in each AZ 
 
