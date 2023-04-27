@@ -128,7 +128,7 @@ resource "aws_security_group_rule" "allow-all-in-lan" {
   type              = "ingress"
   from_port         = local.port_any
   to_port           = local.port_any
-  protocol          = local.all_ip
+  protocol          = local.protocol_any
   cidr_blocks       = local.all_ip
 
 }
